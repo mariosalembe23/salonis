@@ -1,13 +1,19 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 
 interface NumberPhoneProps {
   number: number | string;
   text: string;
+  addNumberFunc: (number: string) => void;
 }
 
-const NumberItem: React.FC<NumberPhoneProps> = ({ number }) => {
+const NumberItem: React.FC<NumberPhoneProps> = ({ number, addNumberFunc }) => {
   return (
-    <button className="w-14 h-14 flex bg-zinc-900 flex-col transition-all hover:bg-zinc-700 rounded-full border border-zinc-700 shadow-lg text-white">
+    <button
+      onClick={() => addNumberFunc(String(number))}
+      className="w-14 h-14 flex bg-zinc-900 flex-col transition-all hover:bg-zinc-700 rounded-full border border-zinc-700 shadow-lg text-white"
+    >
       <div className="w-full h-full flex justify-center items-center">
         <span className="text-3xl font-medium">{number}</span>
       </div>
@@ -16,6 +22,19 @@ const NumberItem: React.FC<NumberPhoneProps> = ({ number }) => {
 };
 
 export default function USSD() {
+  const [valueCall, setValueCall] = useState<string>("");
+
+  const addNumber = (number: string) => {
+    if (valueCall.length < 6) {
+      setValueCall((prev) => prev + number);
+    }
+  };
+  const removeNumber = () => {
+    if (valueCall.length > 0) {
+      setValueCall((prev) => prev.slice(0, -1));
+    }
+  };
+
   return (
     <div className="flex items-center justify-center h-screen w-full">
       <div className="max-w-[20rem] bg-zinc-500 w-full shadow-lg rounded-[2rem] border border-zinc-200 p-2 h-[37rem]">
@@ -68,31 +87,35 @@ export default function USSD() {
               </span>
             </div>
           </div>
-          <footer className="grid grid-cols-1 gap-2">
+          <footer className="grid grid-cols-1 gap-2 mb-3">
             <header className="w-full py-5 mb-3 flex items-center justify-between">
               <div className="w-full text-center">
-                <p className="text-zinc-100 text-4xl ">*100#</p>
+                {valueCall.length > 0 ? (
+                  <p className="text-zinc-100 text-4xl">{valueCall}</p>
+                ) : (
+                  <p className="text-zinc-400 text-md">Enter USSD Code</p>
+                )}
               </div>
             </header>
             <div className="gap-x-5 grid grid-cols-3">
-              <NumberItem number={1} text="" />
-              <NumberItem number={2} text="" />
-              <NumberItem number={3} text="" />
+              <NumberItem number={1} addNumberFunc={addNumber} text="" />
+              <NumberItem number={2} addNumberFunc={addNumber} text="" />
+              <NumberItem number={3} addNumberFunc={addNumber} text="" />
             </div>
             <div className="gap-x-5 grid grid-cols-3">
-              <NumberItem number={4} text="" />
-              <NumberItem number={5} text="" />
-              <NumberItem number={6} text="" />
+              <NumberItem number={4} addNumberFunc={addNumber} text="" />
+              <NumberItem number={5} addNumberFunc={addNumber} text="" />
+              <NumberItem number={6} addNumberFunc={addNumber} text="" />
             </div>
             <div className="gap-x-5 grid grid-cols-3">
-              <NumberItem number={7} text="" />
-              <NumberItem number={8} text="" />
-              <NumberItem number={9} text="" />
+              <NumberItem number={7} addNumberFunc={addNumber} text="" />
+              <NumberItem number={8} addNumberFunc={addNumber} text="" />
+              <NumberItem number={9} addNumberFunc={addNumber} text="" />
             </div>
             <div className="gap-x-5 grid grid-cols-3">
-              <NumberItem number={"*"} text="" />
-              <NumberItem number={0} text="" />
-              <NumberItem number={"#"} text="" />
+              <NumberItem number={"*"} addNumberFunc={addNumber} text="" />
+              <NumberItem number={0} addNumberFunc={addNumber} text="" />
+              <NumberItem number={"#"} addNumberFunc={addNumber} text="" />
             </div>
 
             <div className="gap-x-5 w-full flex items-center justify-end mt-3">
@@ -111,7 +134,10 @@ export default function USSD() {
                   <path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" />
                 </svg>
               </button>
-              <button className="w-14  self-center h-14 transition-all hover:bg-red-500/70 flex items-center justify-center bg-red-500/50 flex-col rounded-full border border-zinc-800 shadow-lg text-white">
+              <button
+                onClick={removeNumber}
+                className="w-14  self-center h-14 transition-all hover:bg-red-500/70 flex items-center justify-center bg-red-500/50 flex-col rounded-full border border-zinc-800 shadow-lg text-white"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
