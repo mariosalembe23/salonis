@@ -120,10 +120,10 @@ export default function Home() {
             </h2>
           </header>
           <Image
-            src={"/mockup1.png"}
+            src={"/mockup_size.png"}
             alt="mockup image"
             width={600}
-            height={100}
+            height={900}
             className="w-[32rem] relative my-6"
           />
           <footer className="text-center gap-2 grid grid-cols-1 dt:grid-cols-2 mb-10 dt:-mt-0 -mt-14 dt:absolute bottom-0">
