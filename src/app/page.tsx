@@ -127,7 +127,7 @@ export default function Home() {
             className="w-[32rem] relative my-6"
           />
           <footer className="text-center gap-2 grid grid-cols-1 dt:grid-cols-2 mb-10 dt:-mt-0 -mt-14 dt:absolute bottom-0">
-            <button className="bg-[#6D1625] justify-center hover:bg-[#520f1a] flex items-center gap-2 transition-all px-5 py-2 rounded-lg text-white font-medium">
+            <button className="bg-[#6D1625] pt:w-auto w-full justify-center hover:bg-[#520f1a] flex items-center gap-2 transition-all px-5 py-2 rounded-lg text-white font-medium">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -147,7 +147,7 @@ export default function Home() {
             </button>
             <Link
               href={"/ussd"}
-              className="border-[#6D1625] hover:bg-[#f5f5f5] hover:border-zinc-300 justify-center border text-[#6D1625] flex items-center gap-2 transition-all px-5 py-2 rounded-lg font-medium"
+              className="border-[#6D1625] pt:w-auto w-full hover:bg-[#f5f5f5] hover:border-zinc-300 justify-center border text-[#6D1625] flex items-center gap-2 transition-all px-5 py-2 rounded-lg font-medium"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
