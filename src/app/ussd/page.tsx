@@ -12,7 +12,7 @@ const NumberItem: React.FC<NumberPhoneProps> = ({ number, addNumberFunc }) => {
   return (
     <button
       onClick={() => addNumberFunc(String(number))}
-      className="w-14 h-14 flex bg-zinc-900 flex-col transition-all hover:bg-zinc-700 rounded-full border border-zinc-700 shadow-lg text-white"
+      className="w-14 select-none h-14 flex bg-zinc-900 flex-col transition-all hover:bg-zinc-700 rounded-full border border-zinc-700 shadow-lg text-white"
     >
       <div className="w-full h-full flex justify-center items-center">
         <span className="text-3xl font-medium">{number}</span>
@@ -36,8 +36,8 @@ export default function USSD() {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen w-full">
-      <div className="max-w-[20rem] bg-zinc-500 w-full shadow-lg rounded-[2rem] border border-zinc-200 p-2 h-[37rem]">
+    <div className="flex items-center justify-center dt:h-screen dt:py-0 py-10 w-full">
+      <div className="max-w-[20rem] shadow-2xl bg-zinc-500 w-full shadow-zinc-700 rounded-[2rem]  p-2 h-[37rem]">
         <div className="w-full p-5 h-full bg-zinc-800 rounded-[1.4rem] flex flex-col justify-between items-center">
           <div className="flex w-full items-center justify-between">
             <div>
@@ -55,9 +55,9 @@ export default function USSD() {
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   className="icon icon-tabler size-5 icons-tabler-outline icon-tabler-antenna-bars-5"
                 >
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -73,9 +73,9 @@ export default function USSD() {
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   className="icon size-6 icon-tabler icons-tabler-outline icon-tabler-battery-3"
                 >
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -125,9 +125,9 @@ export default function USSD() {
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   className="icon icon-tabler size-7 icons-tabler-outline icon-tabler-phone"
                 >
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -136,7 +136,7 @@ export default function USSD() {
               </button>
               <button
                 onClick={removeNumber}
-                className="w-14  self-center h-14 transition-all hover:bg-red-500/70 flex items-center justify-center bg-red-500/50 flex-col rounded-full border border-zinc-800 shadow-lg text-white"
+                className="w-14  self-center h-14 transition-all hover:bg-red-500/70 flex items-center justify-center bg-red-500/60 flex-col rounded-full border border-zinc-800 shadow-lg text-white"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -152,6 +152,11 @@ export default function USSD() {
           </footer>
         </div>
       </div>
+
+      {/* ASSETS */}
+      <aside className="fixed top-4 left-1/2 -translate-x-1/2 ring-4 ring-blue-500/30 bg-blue-500 px-4 py-1.5 rounded-full">
+        <p className="text-white text-[14px] font-medium">Marque *100#</p>
+      </aside>
     </div>
   );
 }

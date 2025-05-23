@@ -17,6 +17,8 @@
   --foreground: #171717;
 }
 
+
+
 body {
   background: var(--background);
   font-family: "General Sans", sans-serif;
