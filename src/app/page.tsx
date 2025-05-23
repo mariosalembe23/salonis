@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 export default function Home() {
@@ -144,7 +145,10 @@ export default function Home() {
               </svg>
               Download
             </button>
-            <button className="border-[#6D1625] hover:bg-[#f5f5f5] hover:border-zinc-300 justify-center border text-[#6D1625] flex items-center gap-2 transition-all px-5 py-2 rounded-lg font-medium">
+            <Link
+              href={"/ussd"}
+              className="border-[#6D1625] hover:bg-[#f5f5f5] hover:border-zinc-300 justify-center border text-[#6D1625] flex items-center gap-2 transition-all px-5 py-2 rounded-lg font-medium"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -161,7 +165,7 @@ export default function Home() {
                 <path d="M12 4l0 12" />
               </svg>
               Simulação USSD
-            </button>
+            </Link>
           </footer>
         </div>
         <div className="col-span-3 dt:order-3 order-3">
