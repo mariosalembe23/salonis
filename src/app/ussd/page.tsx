@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import React, { useState } from "react";
 
 interface NumberPhoneProps {
@@ -12,7 +13,7 @@ const NumberItem: React.FC<NumberPhoneProps> = ({ number, addNumberFunc }) => {
   return (
     <button
       onClick={() => addNumberFunc(String(number))}
-      className="w-14 select-none h-14 flex bg-zinc-900 flex-col transition-all hover:bg-zinc-700 rounded-full border border-zinc-700 shadow-lg text-white"
+      className="dt:w-14 select-none dt:h-14 h-16 w-16 flex bg-zinc-900 flex-col transition-all hover:bg-zinc-700 rounded-full border border-zinc-700 shadow-lg text-white"
     >
       <div className="w-full h-full flex justify-center items-center">
         <span className="text-3xl font-medium">{number}</span>
@@ -36,9 +37,9 @@ export default function USSD() {
   };
 
   return (
-    <div className="flex items-center justify-center dt:h-screen dt:py-0 py-10 w-full">
-      <div className="max-w-[20rem] shadow-2xl bg-zinc-500 w-full shadow-zinc-700 rounded-[2rem]  p-2 h-[37rem]">
-        <div className="w-full p-5 h-full bg-zinc-800 rounded-[1.4rem] flex flex-col justify-between items-center">
+    <div className="flex items-center justify-center smaller:h-auto h-dvh  w-full">
+      <div className="dt:max-w-[20rem] max-w-full shadow-2xl bg-zinc-500 w-full shadow-zinc-700 dt:rounded-[2rem]  dt:p-2 h-full dt:h-[37rem]">
+        <div className="w-full px-5 py-5 pt:pb-5 pb-16 h-full bg-zinc-800 dt:rounded-[1.4rem] flex flex-col justify-between items-center">
           <div className="flex w-full items-center justify-between">
             <div>
               <p className="text-white font-medium">12:50</p>
@@ -118,8 +119,32 @@ export default function USSD() {
               <NumberItem number={"#"} addNumberFunc={addNumber} text="" />
             </div>
 
-            <div className="gap-x-5 w-full flex items-center justify-end mt-3">
-              <button className="w-14  h-14 flex items-center justify-center transition-all hover:bg-green-500/70 bg-green-500/60 flex-col rounded-full border border-zinc-800 shadow-lg text-white">
+            <div className="gap-x-5 w-full grid grid-cols-3 mt-3">
+              <Link
+                href={"/"}
+                className="dt:w-14 select-none h-16 w-16 dt:h-14 flex items-center justify-center bg-zinc-900 flex-col transition-all hover:bg-zinc-700 rounded-full border border-zinc-700 shadow-lg text-white"
+              >
+                <span className="text-3xl font-medium">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="icon icon-tabler icons-tabler-outline icon-tabler-arrow-left"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M5 12l14 0" />
+                    <path d="M5 12l6 6" />
+                    <path d="M5 12l6 -6" />
+                  </svg>
+                </span>
+              </Link>
+              <button className="dt:w-14 w-16 h-16 dt:h-14 flex items-center justify-center transition-all hover:bg-green-500/70 bg-green-500/60 flex-col rounded-full border border-zinc-800 shadow-lg text-white">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -136,7 +161,7 @@ export default function USSD() {
               </button>
               <button
                 onClick={removeNumber}
-                className="w-14  self-center h-14 transition-all hover:bg-red-500/70 flex items-center justify-center bg-red-500/60 flex-col rounded-full border border-zinc-800 shadow-lg text-white"
+                className="dt:w-14 w-16  self-center h-16 dt:h-14 transition-all hover:bg-red-500/70 flex items-center justify-center bg-red-500/60 flex-col rounded-full border border-zinc-800 shadow-lg text-white"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -154,7 +179,7 @@ export default function USSD() {
       </div>
 
       {/* ASSETS */}
-      <aside className="fixed top-4 left-1/2 -translate-x-1/2 ring-4 ring-blue-500/30 bg-blue-500 px-4 py-1.5 rounded-full">
+      <aside className="fixed top-4 dt:inline-flex hidden left-1/2 -translate-x-1/2 ring-4 ring-blue-500/30 bg-blue-500 px-4 py-1.5 rounded-full">
         <p className="text-white text-[14px] font-medium">Marque *100#</p>
       </aside>
     </div>
