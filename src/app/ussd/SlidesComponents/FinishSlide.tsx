@@ -3,8 +3,11 @@
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
+
+
 interface FinishSlideProps {
   setNumberSelected: React.Dispatch<React.SetStateAction<number>>;
+
 }
 
 const FinishSlide: React.FC<FinishSlideProps> = ({ setNumberSelected }) => {

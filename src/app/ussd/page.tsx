@@ -7,6 +7,7 @@ import FirstSlide from "./SlidesComponents/FirstSlide";
 import ProvincesSLide from "./SlidesComponents/ProvincesSlide";
 import MessageSlide from "./SlidesComponents/MessageSlide";
 import FinishSlide from "./SlidesComponents/FinishSlide";
+import Hospitais from "./SlidesComponents/Hospitais";
 
 interface NumberPhoneProps {
   number: number | string;
@@ -50,11 +51,19 @@ const NumberItem: React.FC<NumberPhoneProps> = ({ number, addNumberFunc }) => {
 //   );
 // };
 
+type TypeRedirect = "first" | "second" | "third";
+
 const ChoiceCard = () => {
   const [numberOption, setNumberOption] = useState<string>("");
   const [numberSelected, setNumberSelected] = useState<number>(0);
   const [provinceName, setProvinceName] = useState<string>("");
   const [municipeName, setMunicipeName] = useState<string>("");
+  const [typeRedirect, setTypeRedirect] = useState<TypeRedirect>("second");
+
+  console.log("Province Name:", provinceName);
+  console.log("Municipe Name:", municipeName);
+  console.log("Type Redirect:", typeRedirect);
+  console.log("Number Option:", numberSelected);
 
   return (
     <div className="absolute z-30 top-0 rounded-[1.4rem] left-0 w-full h-full bg-zinc-800 ">
@@ -65,10 +74,11 @@ const ChoiceCard = () => {
               numberOption={numberOption}
               setNumberOption={setNumberOption}
               setNumberSelected={setNumberSelected}
+              setTypeRedirect={setTypeRedirect}
             />
           </section>
         )}
-        {numberSelected === 1 && (
+        {numberSelected === 1 ? (
           <section className="pt-5 w-full h-full">
             <ProvincesSLide
               numberOption={numberOption}
@@ -76,12 +86,32 @@ const ChoiceCard = () => {
               setNumberSelected={setNumberSelected}
               setProvinceName={setProvinceName}
               setMunicipeName={setMunicipeName}
+              typeRedirect={typeRedirect}
             />
           </section>
-        )}
+        ) : numberSelected === 20 ? (
+          <section className="pt-5 w-full h-full">
+            <ProvincesSLide
+              numberOption={numberOption}
+              setNumberOption={setNumberOption}
+              setNumberSelected={setNumberSelected}
+              setProvinceName={setProvinceName}
+              setMunicipeName={setMunicipeName}
+              typeRedirect={typeRedirect}
+            />
+          </section>
+        ) : null}
 
         {numberSelected === 2 && (
           <MessageSlide
+            provinceName={provinceName}
+            municipeName={municipeName}
+            setNumberSelected={setNumberSelected}
+          />
+        )}
+
+        {numberSelected === 6 && (
+          <Hospitais
             provinceName={provinceName}
             municipeName={municipeName}
             setNumberSelected={setNumberSelected}

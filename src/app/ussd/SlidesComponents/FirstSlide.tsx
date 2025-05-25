@@ -4,16 +4,20 @@ import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Options } from "../data";
 
+type TypeRedirect = "first" | "second" | "third";
+
 interface FirstSlideProps {
   numberOption: string;
   setNumberOption: React.Dispatch<React.SetStateAction<string>>;
   setNumberSelected: React.Dispatch<React.SetStateAction<number>>;
+  setTypeRedirect: React.Dispatch<React.SetStateAction<TypeRedirect>>;
 }
 
 const FirstSlide: React.FC<FirstSlideProps> = ({
   numberOption,
   setNumberOption,
   setNumberSelected,
+  setTypeRedirect,
 }) => {
   const [buttonValid, setButtonValid] = useState<boolean>(false);
 
@@ -52,7 +56,15 @@ const FirstSlide: React.FC<FirstSlideProps> = ({
       );
     }
 
-    setNumberSelected(parseInt(numberOption));
+    const parsedNumberOption = parseInt(numberOption, 10);
+    setNumberSelected(
+      parsedNumberOption === 2 ? parsedNumberOption * 10 : parsedNumberOption
+    );
+
+    if (parsedNumberOption === 1) setTypeRedirect("first");
+    else if (parsedNumberOption === 20) setTypeRedirect("second");
+    else if (parsedNumberOption === 30) setTypeRedirect("third");
+
     setNumberOption("");
   };
 

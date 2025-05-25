@@ -81,6 +81,7 @@ const MessageSlide: React.FC<MessageSlideProps> = ({
         </header>
         <footer className="my-3 px-6 flex flex-col justify-center">
           <textarea
+            maxLength={100}
             disabled={loading}
             name="textDescription"
             onChange={(e) => setTextDescription(e.target.value)}

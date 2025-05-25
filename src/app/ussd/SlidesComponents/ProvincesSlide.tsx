@@ -4,12 +4,15 @@ import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Municipes, Provinces } from "../data";
 
+type TypeRedirect = "first" | "second" | "third";
+
 interface ProvincesSlideProps {
   numberOption: string;
   setNumberOption: React.Dispatch<React.SetStateAction<string>>;
   setNumberSelected: React.Dispatch<React.SetStateAction<number>>;
   setProvinceName: React.Dispatch<React.SetStateAction<string>>;
   setMunicipeName: React.Dispatch<React.SetStateAction<string>>;
+  typeRedirect: TypeRedirect;
 }
 
 const ProvincesSLide: React.FC<ProvincesSlideProps> = ({
@@ -18,6 +21,7 @@ const ProvincesSLide: React.FC<ProvincesSlideProps> = ({
   setNumberSelected,
   setMunicipeName,
   setProvinceName,
+  typeRedirect,
 }) => {
   const [buttonValid, setButtonValid] = useState<boolean>(false);
   const [municipeIndex, setMunicipeIndex] = useState<number | null>(null);
@@ -101,7 +105,10 @@ const ProvincesSLide: React.FC<ProvincesSlideProps> = ({
       );
     }
 
-    if (municipeIndex !== null) setNumberSelected(2);
+    if (municipeIndex !== null && typeRedirect === "first")
+      setNumberSelected(2);
+    if (municipeIndex !== null && typeRedirect === "second")
+      setNumberSelected(6);
     setNumberOption("");
   };
 
