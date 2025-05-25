@@ -8,6 +8,7 @@ import ProvincesSLide from "./SlidesComponents/ProvincesSlide";
 import MessageSlide from "./SlidesComponents/MessageSlide";
 import FinishSlide from "./SlidesComponents/FinishSlide";
 import Hospitais from "./SlidesComponents/Hospitais";
+import ZonasAfProps from "./SlidesComponents/ZonasAf";
 
 interface NumberPhoneProps {
   number: number | string;
@@ -58,7 +59,7 @@ const ChoiceCard = () => {
   const [numberSelected, setNumberSelected] = useState<number>(0);
   const [provinceName, setProvinceName] = useState<string>("");
   const [municipeName, setMunicipeName] = useState<string>("");
-  const [typeRedirect, setTypeRedirect] = useState<TypeRedirect>("second");
+  const [typeRedirect, setTypeRedirect] = useState<TypeRedirect>("first");
 
   console.log("Province Name:", provinceName);
   console.log("Municipe Name:", municipeName);
@@ -116,6 +117,10 @@ const ChoiceCard = () => {
             municipeName={municipeName}
             setNumberSelected={setNumberSelected}
           />
+        )}
+
+        {numberSelected === 30 && (
+          <ZonasAfProps setNumberSelected={setNumberSelected} />
         )}
 
         {numberSelected === 3 && (

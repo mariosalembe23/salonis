@@ -58,7 +58,9 @@ const FirstSlide: React.FC<FirstSlideProps> = ({
 
     const parsedNumberOption = parseInt(numberOption, 10);
     setNumberSelected(
-      parsedNumberOption === 2 ? parsedNumberOption * 10 : parsedNumberOption
+      parsedNumberOption === 2 || parsedNumberOption === 3
+        ? parsedNumberOption * 10
+        : parsedNumberOption
     );
 
     if (parsedNumberOption === 1) setTypeRedirect("first");
