@@ -4,11 +4,17 @@ import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Options } from "../data";
 
-const FirstSlide: React.FC<{
+interface FirstSlideProps {
   numberOption: string;
   setNumberOption: React.Dispatch<React.SetStateAction<string>>;
   setNumberSelected: React.Dispatch<React.SetStateAction<number>>;
-}> = ({ numberOption, setNumberOption, setNumberSelected }) => {
+}
+
+const FirstSlide: React.FC<FirstSlideProps> = ({
+  numberOption,
+  setNumberOption,
+  setNumberSelected,
+}) => {
   const [buttonValid, setButtonValid] = useState<boolean>(false);
 
   useEffect(() => {

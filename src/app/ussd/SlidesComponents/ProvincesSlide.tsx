@@ -4,11 +4,21 @@ import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Municipes, Provinces } from "../data";
 
-const ProvincesSLide: React.FC<{
+interface ProvincesSlideProps {
   numberOption: string;
   setNumberOption: React.Dispatch<React.SetStateAction<string>>;
   setNumberSelected: React.Dispatch<React.SetStateAction<number>>;
-}> = ({ numberOption, setNumberOption, setNumberSelected }) => {
+  setProvinceName: React.Dispatch<React.SetStateAction<string>>;
+  setMunicipeName: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const ProvincesSLide: React.FC<ProvincesSlideProps> = ({
+  numberOption,
+  setNumberOption,
+  setNumberSelected,
+  setMunicipeName,
+  setProvinceName,
+}) => {
   const [buttonValid, setButtonValid] = useState<boolean>(false);
   const [municipeIndex, setMunicipeIndex] = useState<number | null>(null);
   const [numberOptionMunicipe, setNumberOptionMunicipe] = useState<string>("");
@@ -81,6 +91,17 @@ const ProvincesSLide: React.FC<{
 
     // Seleção de província
     setMunicipeIndex(parseInt(numberOption) - 1);
+
+    if (municipeIndex === null) {
+      setProvinceName(Provinces[parseInt(numberOption) - 1]);
+    }
+    if (municipeIndex !== null) {
+      setMunicipeName(
+        Municipes[municipeIndex][parseInt(numberOptionMunicipe) - 1]
+      );
+    }
+
+    if (municipeIndex !== null) setNumberSelected(2);
     setNumberOption("");
   };
 
@@ -118,6 +139,7 @@ const ProvincesSLide: React.FC<{
                 </div>
               ))
             : municipeIndex !== null &&
+              Array.isArray(Municipes[municipeIndex]) &&
               Municipes[municipeIndex].map((option, index) => (
                 <div key={index} className="flex flex-col items-center gap-2">
                   <button

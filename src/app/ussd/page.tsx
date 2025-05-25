@@ -4,7 +4,9 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { Toaster } from "sonner";
 import FirstSlide from "./SlidesComponents/FirstSlide";
-import ProvincesSLide from "./SlidesComponents/Provinces";
+import ProvincesSLide from "./SlidesComponents/ProvincesSlide";
+import MessageSlide from "./SlidesComponents/MessageSlide";
+import FinishSlide from "./SlidesComponents/FinishSlide";
 
 interface NumberPhoneProps {
   number: number | string;
@@ -51,11 +53,12 @@ const NumberItem: React.FC<NumberPhoneProps> = ({ number, addNumberFunc }) => {
 const ChoiceCard = () => {
   const [numberOption, setNumberOption] = useState<string>("");
   const [numberSelected, setNumberSelected] = useState<number>(0);
+  const [provinceName, setProvinceName] = useState<string>("");
+  const [municipeName, setMunicipeName] = useState<string>("");
 
   return (
     <div className="absolute z-30 top-0 rounded-[1.4rem] left-0 w-full h-full bg-zinc-800 ">
       <header className="flex items-center justify-center h-full w-full">
-        {/* {numberSelected === 1 && <LoadingComponent />} */}
         {numberSelected === 0 && (
           <section>
             <FirstSlide
@@ -71,8 +74,22 @@ const ChoiceCard = () => {
               numberOption={numberOption}
               setNumberOption={setNumberOption}
               setNumberSelected={setNumberSelected}
+              setProvinceName={setProvinceName}
+              setMunicipeName={setMunicipeName}
             />
           </section>
+        )}
+
+        {numberSelected === 2 && (
+          <MessageSlide
+            provinceName={provinceName}
+            municipeName={municipeName}
+            setNumberSelected={setNumberSelected}
+          />
+        )}
+
+        {numberSelected === 3 && (
+          <FinishSlide setNumberSelected={setNumberSelected} />
         )}
       </header>
     </div>
