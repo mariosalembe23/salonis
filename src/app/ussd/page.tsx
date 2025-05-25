@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Toaster } from "sonner";
 import FirstSlide from "./SlidesComponents/FirstSlide";
 import ProvincesSLide from "./SlidesComponents/ProvincesSlide";
@@ -20,11 +20,9 @@ const NumberItem: React.FC<NumberPhoneProps> = ({ number, addNumberFunc }) => {
   return (
     <button
       onClick={() => addNumberFunc(String(number))}
-      className="dt:w-14 select-none dt:h-14 h-16 w-16 flex bg-zinc-900 flex-col transition-all hover:bg-zinc-700 rounded-full border border-zinc-700 shadow-lg text-white"
+      className="dt:w-14 select-none text-3xl font-medium justify-center items-center dt:h-14 h-16 w-16 flex bg-zinc-900 flex-col transition-all hover:bg-zinc-700 rounded-full border border-zinc-700 shadow-lg text-white"
     >
-      <div className="w-full h-full flex justify-center items-center">
-        <span className="text-3xl font-medium">{number}</span>
-      </div>
+      {number}
     </button>
   );
 };
@@ -54,17 +52,18 @@ const NumberItem: React.FC<NumberPhoneProps> = ({ number, addNumberFunc }) => {
 
 type TypeRedirect = "first" | "second" | "third";
 
-const ChoiceCard = () => {
+const ChoiceCard: React.FC<{
+  setUssdAccept: React.Dispatch<React.SetStateAction<boolean>>;
+}> = ({ setUssdAccept }) => {
   const [numberOption, setNumberOption] = useState<string>("");
   const [numberSelected, setNumberSelected] = useState<number>(0);
   const [provinceName, setProvinceName] = useState<string>("");
   const [municipeName, setMunicipeName] = useState<string>("");
   const [typeRedirect, setTypeRedirect] = useState<TypeRedirect>("first");
 
-  console.log("Province Name:", provinceName);
-  console.log("Municipe Name:", municipeName);
-  console.log("Type Redirect:", typeRedirect);
-  console.log("Number Option:", numberSelected);
+  useEffect(() => {
+    if (numberSelected === 40) setUssdAccept(false);
+  }, [numberSelected, setUssdAccept]);
 
   return (
     <div className="absolute z-30 top-0 rounded-[1.4rem] left-0 w-full h-full bg-zinc-800 ">
@@ -133,6 +132,7 @@ const ChoiceCard = () => {
 
 export default function USSD() {
   const [valueCall, setValueCall] = useState<string>("");
+  const [ussdAccept, setUssdAccept] = useState<boolean>(false);
 
   const addNumber = (number: string) => {
     if (valueCall.length < 6) {
@@ -150,7 +150,7 @@ export default function USSD() {
       <Toaster position="bottom-center" />
       <div className="dt:max-w-[20rem] max-w-full shadow-2xl bg-zinc-500 w-full shadow-zinc-700 dt:rounded-[2rem]  dt:p-2 h-full dt:h-[40rem]">
         <div className="w-full relative  px-5 py-5 pt:pb-5 pb-16 h-full bg-zinc-800 dt:rounded-[1.4rem] flex flex-col justify-between items-center">
-          <ChoiceCard />
+          {ussdAccept && <ChoiceCard setUssdAccept={setUssdAccept} />}
           <div className="flex relative z-20 w-full items-center justify-between">
             <div>
               <p className="text-white font-medium">12:50</p>
@@ -255,7 +255,14 @@ export default function USSD() {
                   </svg>
                 </span>
               </Link>
-              <button className="dt:w-14 w-16 h-16 dt:h-14 flex items-center justify-center transition-all hover:bg-green-500/70 bg-green-500/60 flex-col rounded-full border border-zinc-800 shadow-lg text-white">
+              <button
+                onClick={() => {
+                  if (valueCall.length > 0 && valueCall === "*100#") {
+                    setUssdAccept(true);
+                  }
+                }}
+                className="dt:w-14 w-16 h-16 dt:h-14 flex items-center justify-center transition-all hover:bg-green-500/70 bg-green-500/60 flex-col rounded-full border border-zinc-800 shadow-lg text-white"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
