@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
-import Options from "./data";
-import { toast, Toaster } from "sonner";
+import React, { useState } from "react";
+import { Toaster } from "sonner";
+import FirstSlide from "./SlidesComponents/FirstSlide";
+import ProvincesSLide from "./SlidesComponents/Provinces";
 
 interface NumberPhoneProps {
   number: number | string;
@@ -24,113 +25,55 @@ const NumberItem: React.FC<NumberPhoneProps> = ({ number, addNumberFunc }) => {
   );
 };
 
-const LoadingComponent = () => {
-  return (
-    <div className="flex flex-col items-center justify-center">
-      <div className="sk-cube-grid">
-        <div className="sk-cube sk-cube1"></div>
-        <div className="sk-cube sk-cube2"></div>
-        <div className="sk-cube sk-cube3"></div>
-        <div className="sk-cube sk-cube4"></div>
-        <div className="sk-cube sk-cube5"></div>
-        <div className="sk-cube sk-cube6"></div>
-        <div className="sk-cube sk-cube7"></div>
-        <div className="sk-cube sk-cube8"></div>
-        <div className="sk-cube sk-cube9"></div>
-      </div>
-      <div>
-        <p className="text-white animate-pulse font-[450] -mt-20">
-          Processando...
-        </p>
-      </div>
-    </div>
-  );
-};
-
-const FirstSlide = () => {
-  const [numberOption, setNumberOption] = useState<string>("");
-  const [buttonValid, setButtonValid] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (numberOption.length > 0) {
-      setButtonValid(true);
-    } else {
-      setButtonValid(false);
-    }
-  }, [numberOption]);
-
-  const setNumber = (startOption: string, endOption: string) => {
-    const numberRegex = /^[0-9]+$/;
-
-    if (numberOption && !numberRegex.test(numberOption)) {
-      return toast.error("Por favor, insira um número.", {
-        classNames: {
-          toast: "!text-white !bg-zinc-800 !border-zinc-700 !border-2",
-          icon: "!text-red-500",
-        },
-      });
-    }
-
-    if (numberOption < startOption || numberOption > endOption) {
-      return toast.error(
-        `Por favor, insira um número entre ${startOption} e ${endOption}.`,
-        {
-          classNames: {
-            toast: "!text-white !bg-zinc-800 !border-zinc-700 !border-2",
-            icon: "!text-red-500",
-          },
-        }
-      );
-    }
-  };
-
-  return (
-    <div className="flex gap-2 flex-col items-center justify-center h-full w-full">
-      <div>
-        <h2 className="text-zinc-300 text-[15px] font-medium">
-          Selecione uma opção
-        </h2>
-      </div>
-      <div className="flex flex-col gap-2 items-center justify-center w-full">
-        {Options.map((option, index) => (
-          <p
-            key={index}
-            className="text-white font-medium text-[15px] hover:text-orange-400 transition-all cursor-pointer"
-          >
-            {index + 1} - {option}
-          </p>
-        ))}
-      </div>
-      <footer className="mt-5 flex flex-col justify-center">
-        <input
-          type="text"
-          name="numberOption"
-          onChange={(e) => setNumberOption(e.target.value)}
-          value={numberOption}
-          id="numberOption"
-          className="bg-transparent border text-[15px] placeholder:text-[14px] px-4 w-full text-white outline-none transition-all font-medium focus:border-zinc-600 placeholder:text-zinc-400 border-zinc-700 py-1.5 rounded-lg"
-          placeholder="Digite o número da opção"
-        />
-        <button
-          onClick={() => setNumber("1", "4")}
-          disabled={!buttonValid}
-          className="text-white disabled:opacity-30 border transition-all hover:bg-zinc-950 border-zinc-700 bg-zinc-900 py-1.5 rounded-lg mt-2 text-[15px] font-medium"
-        >
-          Confirmar
-        </button>
-      </footer>
-    </div>
-  );
-};
+// const LoadingComponent = () => {
+//   return (
+//     <div className="flex flex-col items-center justify-center">
+//       <div className="sk-cube-grid">
+//         <div className="sk-cube sk-cube1"></div>
+//         <div className="sk-cube sk-cube2"></div>
+//         <div className="sk-cube sk-cube3"></div>
+//         <div className="sk-cube sk-cube4"></div>
+//         <div className="sk-cube sk-cube5"></div>
+//         <div className="sk-cube sk-cube6"></div>
+//         <div className="sk-cube sk-cube7"></div>
+//         <div className="sk-cube sk-cube8"></div>
+//         <div className="sk-cube sk-cube9"></div>
+//       </div>
+//       <div>
+//         <p className="text-white animate-pulse font-[450] -mt-20">
+//           Processando...
+//         </p>
+//       </div>
+//     </div>
+//   );
+// };
 
 const ChoiceCard = () => {
+  const [numberOption, setNumberOption] = useState<string>("");
+  const [numberSelected, setNumberSelected] = useState<number>(0);
+
   return (
-    <div className="absolute top-0 rounded-[1.4rem] left-0 w-full h-full bg-zinc-800 ">
+    <div className="absolute z-30 top-0 rounded-[1.4rem] left-0 w-full h-full bg-zinc-800 ">
       <header className="flex items-center justify-center h-full w-full">
-        {/* <LoadingComponent /> */}
-        <section>
-          <FirstSlide />
-        </section>
+        {/* {numberSelected === 1 && <LoadingComponent />} */}
+        {numberSelected === 0 && (
+          <section>
+            <FirstSlide
+              numberOption={numberOption}
+              setNumberOption={setNumberOption}
+              setNumberSelected={setNumberSelected}
+            />
+          </section>
+        )}
+        {numberSelected === 1 && (
+          <section className="pt-5 w-full h-full">
+            <ProvincesSLide
+              numberOption={numberOption}
+              setNumberOption={setNumberOption}
+              setNumberSelected={setNumberSelected}
+            />
+          </section>
+        )}
       </header>
     </div>
   );
@@ -153,7 +96,7 @@ export default function USSD() {
   return (
     <div className="flex items-center justify-center smaller:h-auto h-dvh  w-full">
       <Toaster position="bottom-center" />
-      <div className="dt:max-w-[20rem] max-w-full shadow-2xl bg-zinc-500 w-full shadow-zinc-700 dt:rounded-[2rem]  dt:p-2 h-full dt:h-[37rem]">
+      <div className="dt:max-w-[20rem] max-w-full shadow-2xl bg-zinc-500 w-full shadow-zinc-700 dt:rounded-[2rem]  dt:p-2 h-full dt:h-[40rem]">
         <div className="w-full relative  px-5 py-5 pt:pb-5 pb-16 h-full bg-zinc-800 dt:rounded-[1.4rem] flex flex-col justify-between items-center">
           <ChoiceCard />
           <div className="flex relative z-20 w-full items-center justify-between">
