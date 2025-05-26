@@ -27,29 +27,6 @@ const NumberItem: React.FC<NumberPhoneProps> = ({ number, addNumberFunc }) => {
   );
 };
 
-// const LoadingComponent = () => {
-//   return (
-//     <div className="flex flex-col items-center justify-center">
-//       <div className="sk-cube-grid">
-//         <div className="sk-cube sk-cube1"></div>
-//         <div className="sk-cube sk-cube2"></div>
-//         <div className="sk-cube sk-cube3"></div>
-//         <div className="sk-cube sk-cube4"></div>
-//         <div className="sk-cube sk-cube5"></div>
-//         <div className="sk-cube sk-cube6"></div>
-//         <div className="sk-cube sk-cube7"></div>
-//         <div className="sk-cube sk-cube8"></div>
-//         <div className="sk-cube sk-cube9"></div>
-//       </div>
-//       <div>
-//         <p className="text-white animate-pulse font-[450] -mt-20">
-//           Processando...
-//         </p>
-//       </div>
-//     </div>
-//   );
-// };
-
 type TypeRedirect = "first" | "second" | "third";
 
 const ChoiceCard: React.FC<{
@@ -60,6 +37,8 @@ const ChoiceCard: React.FC<{
   const [provinceName, setProvinceName] = useState<string>("");
   const [municipeName, setMunicipeName] = useState<string>("");
   const [typeRedirect, setTypeRedirect] = useState<TypeRedirect>("first");
+
+  console.log(typeRedirect)
 
   useEffect(() => {
     if (numberSelected === 40) setUssdAccept(false);

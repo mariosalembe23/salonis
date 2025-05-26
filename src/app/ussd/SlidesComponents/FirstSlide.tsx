@@ -66,8 +66,8 @@ const FirstSlide: React.FC<FirstSlideProps> = ({
     );
 
     if (parsedNumberOption === 1) setTypeRedirect("first");
-    else if (parsedNumberOption === 20) setTypeRedirect("second");
-    else if (parsedNumberOption === 30) setTypeRedirect("third");
+    else if (parsedNumberOption === 2) setTypeRedirect("second");
+    else if (parsedNumberOption === 3) setTypeRedirect("third");
 
     setNumberOption("");
   };
