@@ -124,10 +124,10 @@ const ZonasAfProps: React.FC<{
                     {hospital.address}
                   </h4>
                   <p className="text-zinc-400 text-[12px]">
-                    Endereço: {hospital.level}
+                    Nível: {hospital.level}
                   </p>
                   <p className="text-zinc-400 text-[12px]">
-                    Telefone: {hospital.description}
+                    Descrição: {hospital.description}
                   </p>
                 </div>
               ))
