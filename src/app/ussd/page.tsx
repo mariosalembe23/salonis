@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { Toaster } from "sonner";
+import { toast, Toaster } from "sonner";
 import FirstSlide from "./SlidesComponents/FirstSlide";
 import ProvincesSLide from "./SlidesComponents/ProvincesSlide";
 import MessageSlide from "./SlidesComponents/MessageSlide";
@@ -38,7 +38,7 @@ const ChoiceCard: React.FC<{
   const [municipeName, setMunicipeName] = useState<string>("");
   const [typeRedirect, setTypeRedirect] = useState<TypeRedirect>("first");
 
-  console.log(typeRedirect)
+  console.log(typeRedirect);
 
   useEffect(() => {
     if (numberSelected === 40) setUssdAccept(false);
@@ -127,8 +127,8 @@ export default function USSD() {
   return (
     <div className="flex items-center justify-center smaller:h-auto h-dvh  w-full">
       <Toaster position="bottom-center" />
-      <div className="dt:max-w-[20rem] max-w-full shadow-2xl bg-zinc-500 w-full shadow-zinc-700 dt:rounded-[2rem]  dt:p-2 h-full dt:h-[40rem]">
-        <div className="w-full relative  px-5 py-5 pt:pb-5 pb-16 h-full bg-zinc-800 dt:rounded-[1.4rem] flex flex-col justify-between items-center">
+      <div className="pt:max-w-[20rem] max-w-full shadow-2xl bg-zinc-500 w-full shadow-zinc-700 pt:rounded-[2rem]  dt:p-2 h-full pt:h-[40rem]">
+        <div className="w-full relative  px-5 py-5 pt:pb-5 pb-16 h-full bg-zinc-800 pt:rounded-[1.4rem] flex flex-col justify-between items-center">
           {ussdAccept && <ChoiceCard setUssdAccept={setUssdAccept} />}
           <div className="flex relative z-20 w-full items-center justify-between">
             <div>
@@ -236,8 +236,16 @@ export default function USSD() {
               </Link>
               <button
                 onClick={() => {
-                  if (valueCall.length > 0 && valueCall === "*100#") {
+                  if (valueCall.length > 0 && valueCall === "*42#") {
                     setUssdAccept(true);
+                  } else {
+                    toast.error("Código Inválido ou não Registrado", {
+                      classNames: {
+                        toast:
+                          "!text-white !bg-zinc-800 !border-zinc-700 !border-2",
+                        icon: "!text-red-500",
+                      },
+                    });
                   }
                 }}
                 className="dt:w-14 w-16 h-16 dt:h-14 flex items-center justify-center transition-all hover:bg-green-500/70 bg-green-500/60 flex-col rounded-full border border-zinc-800 shadow-lg text-white"
@@ -277,7 +285,7 @@ export default function USSD() {
 
       {/* ASSETS */}
       <aside className="fixed top-4 dt:inline-flex hidden left-1/2 -translate-x-1/2 ring-4 ring-blue-500/30 bg-blue-500 px-4 py-1.5 rounded-full">
-        <p className="text-white text-[14px] font-medium">Marque *100#</p>
+        <p className="text-white text-[14px] font-medium">Marque *42#</p>
       </aside>
     </div>
   );
