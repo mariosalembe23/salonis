@@ -1,6 +1,5 @@
-import React, { use, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Municipes, Options, Provinces } from "../ussd/data";
-import Cookies from "js-cookie";
 import axios from "axios";
 
 interface ScreenProps {
@@ -22,26 +21,29 @@ const AnswerScreenOp: React.FC<{
   isCalling: boolean;
   setIsCalling: React.Dispatch<React.SetStateAction<boolean>>;
 }> = ({ value, isCalling, setIsCalling, range }) => {
-  // useEffect(() => {
-  //   const timeout = setTimeout(() => {
-  //     if (value !== "*42#") {
-  //       setIsCalling(false);
-  //     }
-  //   }, 1000);
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (value !== "*42#") {
+        setIsCalling(false);
+      }
+    }, 1000);
 
-  //   return () => clearTimeout(timeout);
-  // }, [value, isCalling, setIsCalling]);
+    return () => clearTimeout(timeout);
+  }, [value, isCalling, setIsCalling]);
 
   return (
     <div className="flex overflow-hidden flex-col relative h-full justify-end items-end">
-      {/* {value && value !== "*42#" && isCalling && (
-          <div className="w-full h-full absolute top-0 left-0 bg-[rgba(0,0,0,0.5)]">
-            <div className="absolute w-[90%] left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 px-5 py-3 rounded-md bg-white">
-              <p className="text-[13px] font-medium">Código USSD Inválido.</p>
-            </div>
+      {value !== "*42#" && isCalling && (
+        <div className="w-full h-full absolute top-0 left-0 bg-[rgba(0,0,0,0.5)]">
+          <div className="absolute w-[90%] left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 px-5 py-3 rounded-md bg-white">
+            <p className="text-[13px] font-medium">Código USSD Inválido.</p>
           </div>
-        )} */}
-      <p className="text-black text-5xl font-semibold">{value}</p>
+        </div>
+      )}
+      <p className="flex items-end text-black text-5xl px-1 py-1 font-semibold">
+        {value}
+        <div className="h-10 w-[0.14rem] bg-zinc-900 pulse "></div>
+      </p>
     </div>
   );
 };
@@ -85,7 +87,10 @@ const AnswerScreen: React.FC<{
           </div>
         </div>
       )}
-      <p className="text-black text-5xl font-semibold">{value}</p>
+      <p className="flex items-end text-black text-5xl px-1 py-1 font-semibold">
+        {value}
+        <div className="h-10 w-[0.14rem] bg-zinc-900 pulse "></div>
+      </p>
     </div>
   );
 };
@@ -98,7 +103,6 @@ const Screen: React.FC<ScreenProps> = ({
   setIsCalling,
   setResponse,
   setBack,
-  back,
   response,
   setValuePhone,
   setIsSelected,
@@ -120,10 +124,6 @@ const Screen: React.FC<ScreenProps> = ({
   console.log("Municipe Index: ", municipeIndex);
   console.log("Province Index: ", provinceIndex);
   console.log("Stage: ", stage);
-
-  // useEffect(() => {
-  //   Cookies.set("stage", "initial");
-  // }, []);
 
   const sendData = React.useCallback(async () => {
     console.log("Sending data...");
@@ -197,7 +197,6 @@ const Screen: React.FC<ScreenProps> = ({
     // SELECIONADA UMA DAS OPÇÕES
     if (isSelected && parseInt(valuePhone) === 1 && stage === "initial") {
       setStage("report_province");
-      console.log("**************************************1");
       setOptions(11);
       setIsCalling(false);
       setResponse(false);
@@ -226,7 +225,6 @@ const Screen: React.FC<ScreenProps> = ({
       stage === "report_province" &&
       !selectedProvince
     ) {
-      console.log("**************************************");
       setStage("report_municipe");
       setOptions(111);
       setProvinceIndex(valuePhone ? parseInt(valuePhone) - 1 : 0);
