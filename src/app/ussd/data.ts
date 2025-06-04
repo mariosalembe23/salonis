@@ -5,6 +5,24 @@ const Options = [
   "Sair",
 ];
 
+const ScaleProps = {
+  option_one: [
+    "seeProvinces",
+    "insertProvince",
+    "seeMunicipes",
+    "insertMunicipes",
+    "sendReport",
+  ],
+  option_two: [
+    "seeProvinces",
+    "insertProvince",
+    "seeMunicipes",
+    "insertMunicipes",
+    "showHospitals",
+  ],
+  option_three: ["showAffectedAreas"],
+};
+
 const Provinces = [
   "Benguela",
   "Bié",
