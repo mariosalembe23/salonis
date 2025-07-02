@@ -146,7 +146,7 @@ export default function Home() {
               Download
             </button>
             <Link
-              href={"/ussd"}
+              href={"/mobile"}
               className="border-[#6D1625] pt:w-auto w-full hover:bg-[#f5f5f5] hover:border-zinc-300 justify-center border text-[#6D1625] flex items-center gap-2 transition-all px-5 py-2 rounded-lg font-medium"
             >
               <svg

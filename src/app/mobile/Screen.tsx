@@ -113,7 +113,7 @@ const Screen: React.FC<ScreenProps> = ({
   const [provinceIndex, setProvinceIndex] = React.useState<number>(0);
   const [selectedProvince, setSelectedProvince] =
     React.useState<boolean>(false);
-  const [stage, setStage] = React.useState<string>("initial");
+  const [stage, setStage] = React.useState<string>("stand");
   const [message, setMessage] = React.useState<string>("");
   const [error, setError] = React.useState<string>("");
   const [loading, setLoading] = React.useState<boolean>(false);
@@ -175,6 +175,7 @@ const Screen: React.FC<ScreenProps> = ({
       setBack(false);
       setIsSelected(false);
       setValuePhone("");
+      setStage("initial");
     }
   }, [
     isCalling,

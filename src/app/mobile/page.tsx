@@ -36,7 +36,7 @@ export default function Mobile() {
           back={back}
           setValuePhone={setValuePhone}
           setIsSelected={setIsSelected}
-            isSelected={isSelected}
+          isSelected={isSelected}
         />
         <Buttons
           handleButtonClick={handleButtonClick}
