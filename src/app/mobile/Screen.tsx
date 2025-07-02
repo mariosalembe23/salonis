@@ -20,7 +20,7 @@ const AnswerScreenOp: React.FC<{
   range: number[];
   isCalling: boolean;
   setIsCalling: React.Dispatch<React.SetStateAction<boolean>>;
-}> = ({ value, isCalling, setIsCalling, range }) => {
+}> = ({ value, isCalling, setIsCalling }) => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       if (value !== "*42#") {
@@ -40,10 +40,10 @@ const AnswerScreenOp: React.FC<{
           </div>
         </div>
       )}
-      <p className="flex items-end text-black text-5xl px-1 py-1 font-semibold">
+      <div className="flex items-end text-black text-5xl px-1 py-1 font-semibold">
         {value}
         <div className="h-10 w-[0.14rem] bg-zinc-900 pulse "></div>
-      </p>
+      </div>
     </div>
   );
 };
@@ -87,10 +87,10 @@ const AnswerScreen: React.FC<{
           </div>
         </div>
       )}
-      <p className="flex items-end text-black text-5xl px-1 py-1 font-semibold">
+      <div className="flex items-end text-black text-5xl px-1 py-1 font-semibold">
         {value}
         <div className="h-10 w-[0.14rem] bg-zinc-900 pulse "></div>
-      </p>
+      </div>
     </div>
   );
 };
@@ -117,6 +117,7 @@ const Screen: React.FC<ScreenProps> = ({
   const [message, setMessage] = React.useState<string>("");
   const [error, setError] = React.useState<string>("");
   const [loading, setLoading] = React.useState<boolean>(false);
+  const [success, setSuccess] = React.useState<boolean>(false);
 
   console.log("Value Phone: ", valuePhone);
   console.log("Options: ", options);
@@ -148,9 +149,20 @@ const Screen: React.FC<ScreenProps> = ({
       );
 
       setLoading(false);
+      setSuccess(true);
+      setTimeout(() => {
+        setSuccess(false);
+        setMessage("");
+        setMunicipeIndex(0);
+        setProvinceIndex(0);
+        setSelectedProvince(false);
+        setStage("initial");
+        setOptions(0);
+      }, 2000);
     } catch (error) {
       console.log("Error sending state:", error);
       setLoading(false);
+      setSuccess(false);
     }
   }, [provinceIndex, municipeIndex, message]);
 
@@ -335,6 +347,16 @@ const Screen: React.FC<ScreenProps> = ({
             <div className="absolute flex items-center justify-start gap-2 w-[90%] left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 px-5 py-3 rounded-md bg-white">
               <span className="loader !text-black"></span>{" "}
               <p className="text-[13px] font-medium">Enviando</p>
+            </div>
+          </div>
+        )}
+
+        {success && (
+          <div className="w-full h-full absolute top-0 left-0 bg-[rgba(0,0,0,0.5)]">
+            <div className="absolute flex items-center justify-start gap-2 w-[90%] left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 px-5 py-3 rounded-md bg-white">
+              <p className="text-[13px] font-medium">
+                Mensagem enviada com sucesso!
+              </p>
             </div>
           </div>
         )}
