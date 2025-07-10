@@ -110,6 +110,7 @@ const MessageSlide: React.FC<MessageSlideProps> = ({
             {provinceName ? provinceName : "Luanda"} |{" "}
             {municipeName ? municipeName : "Kilamba Kiaxi"}
           </p>
+         
           <div className="flex mt-2 flex-col gap-2">
             <button
               onClick={() => {

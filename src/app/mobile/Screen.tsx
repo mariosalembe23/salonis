@@ -437,6 +437,9 @@ const Screen: React.FC<ScreenProps> = ({
                   ? `Local: ${Provinces[provinceIndex]} - ${Municipes[provinceIndex][municipeIndex]}`
                   : "Selecione o município"}
               </p>
+              <p className="text-black text-[14px] font-[450] mb-1 text-center">
+                Adicione uma descrição do local
+              </p>
               <textarea
                 name="desc"
                 id="desc"
